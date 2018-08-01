@@ -14,7 +14,6 @@ client.on('message', message => {
 
 
 const Music = require('discord.js-musicbot-addon');
-Music.Client({disableEveryone: true})
 client.login(`NDczODQ0Nzc4MzYyOTk0Njg5.DkMbRQ.JZTiybCEG3qHh70f-aZOBeogXIQ`)
 client.on('ready', ()=> {
     console.log('Ready!')
@@ -40,5 +39,17 @@ client.on('ready', ()=> {
     loopCmd: 'loop', // امر الاعادة
     enableQueueStat: true,
   });
+
+client.on('message', msg => {
+
+    if (msg.content == '+ادخل') {
+        if (msg.member.voiceChannel) {
+
+     if (msg.member.voiceChannel.joinable) {
+         msg.member.voiceChannel.join();
+     }
+    }
+}
+})
 
 client.login(process.env.BOT_TOKEN);
