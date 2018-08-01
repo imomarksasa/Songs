@@ -14,6 +14,7 @@ client.on('message', message => {
 
 
 const Music = require('discord.js-musicbot-addon');
+Music.Client({disableEveryone: true})
 client.login(`NDczODQ0Nzc4MzYyOTk0Njg5.DkMbRQ.JZTiybCEG3qHh70f-aZOBeogXIQ`)
 client.on('ready', ()=> {
     console.log('Ready!')
