@@ -11,7 +11,7 @@ client.on('message', message => {
       }
 });
 
-const Discord = require('discord.js');
+
 const client = new Discord.Client({disableEveryone: true})
 const Music = require('discord.js-musicbot-addon');
 client.login(`NDczODQ0Nzc4MzYyOTk0Njg5.DkMbRQ.JZTiybCEG3qHh70f-aZOBeogXIQ`)
