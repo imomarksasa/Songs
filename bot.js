@@ -64,7 +64,7 @@ client.on("message", msg => { //Alaseri Dev
     
   
     let rUser = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[0]));
-  if(!rUser) return msg.channel.send("Couldn't find users.");
+  if(!rUser) return msg.channel.send("تم اعطاء العضو تحذير");
       let reason = args.join(" ").slice(22);
   
       let reportembed = new Discord.RichEmbed()
