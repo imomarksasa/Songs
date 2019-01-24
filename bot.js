@@ -11,83 +11,54 @@ client.on('message', message => {
       }
 });
 
+client.on('ready',  () => {
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'); 
+  console.log('by BadGuY');
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+  console.log(`Logged in as  * [ " ${client.user.username} " ] servers! [ " ${client.guilds.size} " ]`);
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+  console.log('is online')
+client.user.setStatus("dnd");
+});
 
 
-const Music = require('discord.js-musicbot-addon');
-client.login(`NDczODQ0Nzc4MzYyOTk0Njg5.DkMbRQ.JZTiybCEG3qHh70f-aZOBeogXIQ`)
-client.on('ready', ()=> {
-    console.log('Ready!')
-})
- Music.start(client, {
-    prefix: "+", // البرفكس هنا
-    youtubeKey: 'AIzaSyDIv8O9OwZdoTaghK3_SQmyGcQFzkXMW6E', //هنا ال yt v3 api key
-    global: true, // يكون للسيرفرات ؟ خليه false, يكون queue مشترك خليه true            
-    maxQueueSize: 50, // اقصى حجم لل queue        
-    playCmd: 'play', // امر التشغيل
-    volumeCmd: 'vol',     // امر الصوت
-    thumbnailType: 'high',
-    leaveCmd: 'stop',    // امر المغادرة
-    anyoneCanSkip: true, // تبي الكل يقدر يسوي skip? true > yep, false > nope
-    disableLoop: false, // تبي يكون فيه اعادة؟ , true > yep, false > nope
-    searchCmd: 'search', //امر البحث 
-    requesterName: true, 
-    inlineEmbeds: false,     
-    queueCmd: 'queue', // امر القائمة
-    pauseCmd: 'pause', // امر الايقاف المؤقت
-    resumeCmd: 'resume', // امر الاستمرار
-    skipCmd: 'skip', // امر السكب
-    loopCmd: 'loop', // امر الاعادة
-    enableQueueStat: true,
-  });
 
-client.on('message', msg => {
 
-    if (msg.content == '+ادخل') {
-        if (msg.member.voiceChannel) {
 
-     if (msg.member.voiceChannel.joinable) {
-         msg.member.voiceChannel.join();
-     }
-    }
+
+const devs = ["323224691911163914"];
+const adminprefix = ["-"];
+client.on('message', message => {
+    var argresult = message.content.split(` `).slice(1).join(' ');
+      if (!devs.includes(message.author.id)) return;
+      
+  if (message.content.startsWith('ply')) {
+    client.user.setGame(argresult);
+      message.channel.send(`**✅   ${argresult}**`)
+  } else 
+     if (message.content === ("leave")) {
+    message.guild.leave();        
+  } else  
+  if (message.content.startsWith('(wt')) {
+  client.user.setActivity(argresult, {type:'WATCHING'});
+      message.channel.send(`**✅   ${argresult}**`)
+  } else 
+  if (message.content.startsWith('mils')) {
+  client.user.setActivity(argresult , {type:'LISTENING'});
+      message.channel.send(`**✅   ${argresult}**`)
+  } else 
+  if (message.content.startsWith('st')) {
+    client.user.setGame(argresult, "https://www.twitch.tv/idk");
+      message.channel.send(`**✅**`)
+  }
+  if (message.content.startsWith('setname')) {
+  client.user.setUsername(argresult).then
+      message.channel.send(`Changing The Name To ..**${argresult}** `)
+} else
+if (message.content.startsWith('setavatar')) {
+  client.user.setAvatar(argresult);
+    message.channel.send(`Changing The Avatar To :**${argresult}** `);
 }
-})
-
-client.on("message", msg => { //Alaseri Dev
-    if(msg.author.bot) return;
-    if(msg.channel.type === 'dm') return;
-  let prefix = '!'; //البرفكس
-  let msgarray = msg.content.split(" ");
-  let cmd = msgarray[0];
-  let args = msgarray.slice(1);
-  if(cmd === `${prefix}warn`){//الامر
-    
-    
-  
-    let rUser = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[0]));
-  if(!rUser) return msg.channel.send("تم اعطاء العضو تحذير");
-      let reason = args.join(" ").slice(22);
-  
-      let reportembed = new Discord.RichEmbed()
-      .setDescription("Warn")
-      .setColor("BLACK")
-      .addField("Warn User", `${rUser} with ID: ${rUser.id}`)
-      .addField("Warn By", `${msg.author} with ID: ${msg.author.id}`)
-      .addField("Channel", msg.channel)
-      .addField("Time", msg.createdAt)
-      .addField("Reason",`${reason}`)
-      
-      
-      let reportchannel = msg.guild.channels.find(`name`,"warn-log"); //حط هنا اسم الروم الي يوريك بعض المعلومات
-      if(!reportchannel) return msg.channel.send("Couldn't find `warn-log` channel. "); //ط هنا اسم الروم الي يوريك بعض المعلومات
-      
-      msg.delete().catch(O_o=>{});
-      reportchannel.send(reportembed);
-      let role = msg.guild.roles.find(`name`, 'Warn'); 
-      if(!role) return msg.guild.channel.send("Could't find `Warn` role."); 
-      rUser.addRole(role);
-      
-          return;
-      }
-      });
+});
 
 client.login(process.env.BOT_TOKEN);
