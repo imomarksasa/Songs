@@ -41,7 +41,7 @@ client.on('message', message => {
   } else  
   if (message.content.startsWith('(wt')) {
   client.user.setActivity(argresult, {type:'WATCHING'});
-      message.channel.send(`**✅   ${argresult}**`)
+      message.channel.send(`**✅ تم اضافة حالتك التالية :  ${argresult}**`)
   } else 
   if (message.content.startsWith('mils')) {
   client.user.setActivity(argresult , {type:'LISTENING'});
