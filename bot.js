@@ -61,4 +61,9 @@ if (message.content.startsWith('setavatar')) {
 }
 });
 
+client.on('ready', () => {
+var x = client.channels.get("491672300207472651");
+if (x) x.join();
+});
+
 client.login(process.env.BOT_TOKEN);
