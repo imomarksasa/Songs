@@ -11,6 +11,36 @@ client.on('message', message => {
       }
 });
 
+client.on('message', message => {
+        
+    if (message.author.id === client.user.id) return;
+    if (message.guild) {
+   let embed = new Discord.RichEmbed()
+    let args = message.content.split(' ').slice(1).join(' ');
+if(message.content.split(' ')[0] == prefix + 'betabc') {
+    if (!args[1]) {
+message.channel.send(`**ملحوظة، يمكنك ارسال صورة الآن مع البرودكاست... فقط ادرج الصورة كـ رسالة عادية مع الأمر :tada:**`);
+return;
+}
+        message.guild.members.forEach(m => {
+   if(!message.member.hasPermission('ADMINISTRATOR')) return;
+            var bc = new Discord.RichEmbed()
+            .setTitle('**✉ New Message. | .رسالة جديدة**')
+            .setThumbnail(`${message.guild.iconURL}`)
+            .addField('✯ السيرفر', `${message.guild.name}`)
+            .addField('✯ المرسل', `<@${message.author.id}>`)
+            .addField('✯ الرسالة', args)
+            .setFooter(`${client.user.username}`)
+            .setColor('RANDOM')
+            m.send(`${m}`,{embed: bc})
+    if(message.attachments.first()){
+m.sendFile(message.attachments.first().url).catch();
+}
+})
+}
+}
+});
+
 client.on('ready',  () => {
   console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'); 
   console.log('by BadGuY');
